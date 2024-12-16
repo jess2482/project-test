@@ -44,8 +44,6 @@ function sendResultsToAPI() {
         "total": document.getElementById('total').value
     });
 
-    console.log(data)
-
     let requestOptions = {
         method: 'POST',
         headers: resultsHeader,
