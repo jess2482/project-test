@@ -38,11 +38,13 @@ function sendResultsToAPI() {
     resultsHeader.append("Content-Type", "application/json");
     // temp, do this better later
     let data = JSON.stringify({
-        "boothCode": document.getElementById('boothCode'),
-        "result1": document.getElementById('result1'),
-        "result2": document.getElementById('result2'),
-        "total": document.getElementById('total')
+        "boothCode": document.getElementById('boothCode').value,
+        "result1": document.getElementById('result1').value,
+        "result2": document.getElementById('result2').value,
+        "total": document.getElementById('total').value
     });
+
+    console.log(data)
 
     let requestOptions = {
         method: 'POST',
@@ -53,6 +55,6 @@ function sendResultsToAPI() {
 
     fetch("https://vdzu7vn1d2.execute-api.ap-southeast-2.amazonaws.com/web-form-stage/", requestOptions)
     .then(response => response.text())
-    .then(result => alert(JSON.parse(result).message))
+    .then(result => alert(JSON.parse(result).body))
     .catch(error => console.log('error', error))
 }
