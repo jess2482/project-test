@@ -45,7 +45,7 @@ function sendResultsToAPI() {
         redirect: 'follow'
     };
 
-    fetch("https://99l2dc6jq6.execute-api.ap-southeast-2.amazonaws.com/default/vob-mobile", requestOptions)
+    fetch("https://vdzu7vn1d2.execute-api.ap-southeast-2.amazonaws.com/web-form-stage/", requestOptions)
     .then(response => response.text())
     .then(result => alert(JSON.parse(result).message))
     .catch(error => console.log('error', error))
