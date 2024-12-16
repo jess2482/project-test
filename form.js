@@ -1,25 +1,52 @@
 
 function validateBoothCode() {
+    // todo
+    return true;
+}
+
+function submitResults() {
+    if (validateForm() == false) {
+        return false;
+    }
+    sendResultsToAPI();
     return true;
 }
 
 function validateForm() {
-    const form = document.forms['candidateResults'];
-    let total = parseInt(form['total'].value);
+    let total = parseInt(document.getElementById('total').value);
     let sum = 0;
 
-    Array.from(form.elements).forEach((input) => {
-        if (input.name == 'candidateresult') {
-            let value = parseInt(input.value);
-            if (value <= 0) {
-                alert('All values must be filled out');
-                return false;
-            }
-            sum += value;
+    const results = document.getElementsByName('candidateresult');
+    Array.from(results).forEach((input) => {
+        let value = parseInt(input.value);
+        if (value <= 0 || isNaN(value)) {
+            alert('All values must be filled out');
+            return false;
         }
+        sum += value;
     })
+
     if (sum != total) {
         alert('Incorrect vote tally: ' + sum);
         return false;
     }
+}
+
+function sendResultsToAPI() {
+    // todo
+    let resultsHeader = new Headers();
+    resultsHeader.append("Content-Type", "application/json");
+    let data = JSON.stringify({"test": 'testvalue'});
+
+    let requestOptions = {
+        method: 'POST',
+        headers: resultsHeader,
+        body: data,
+        redirect: 'follow'
+    };
+
+    fetch("https://99l2dc6jq6.execute-api.ap-southeast-2.amazonaws.com/default/vob-mobile", requestOptions)
+    .then(response => response.text())
+    .then(result => alert(JSON.parse(result).message))
+    .catch(error => console.log('error', error))
 }
