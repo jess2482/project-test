@@ -36,7 +36,13 @@ function sendResultsToAPI() {
     // todo
     let resultsHeader = new Headers();
     resultsHeader.append("Content-Type", "application/json");
-    let data = JSON.stringify({"test": 'testvalue'});
+    // temp, do this better later
+    let data = JSON.stringify({
+        "boothCode": document.getElementById('boothCode'),
+        "result1": document.getElementById('result1'),
+        "result2": document.getElementById('result2'),
+        "total": document.getElementById('total')
+    });
 
     let requestOptions = {
         method: 'POST',
